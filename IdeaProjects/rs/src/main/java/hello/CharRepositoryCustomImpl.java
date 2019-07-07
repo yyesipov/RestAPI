@@ -14,13 +14,15 @@ public class CharRepositoryCustomImpl implements CharRepositoryCustom {
 
     @Override
     public List<Character> findCharByKeyword (String keyword){
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Character> query = cb.createQuery(Character.class);
-        Root<Character> root = query.from(Character.class);
-        query.select(root).where(cb.like(root.get("name"), "%keyword%"));
+        CriteriaQuery<Character> cr = cb.createQuery(Character.class);
+        Root<Character> character = cr.from(Character.class);
+
+        cr.select(character).where(cb.like(character.get("name"), "%keyword%"));
 
 
-         return entityManager.createQuery(query).getResultList();
+         return entityManager.createQuery(cr).getResultList();
 
     }
 }

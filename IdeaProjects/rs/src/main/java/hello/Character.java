@@ -2,9 +2,10 @@ package hello;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Character {
+public class Character implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
