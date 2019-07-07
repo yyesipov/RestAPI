@@ -11,11 +11,14 @@ import javax.ws.rs.core.MediaType;
 
 @Controller
 @RequestMapping(path="/demo")
-public class MainController {
+public class MainController extends CharRepositoryCustomImpl{
 
 
     @Autowired
     private CharRepository charRepository;
+
+    @Autowired
+    private CharRepositoryCustomImpl charRepositoryCustomimpl;
 
     @GetMapping(path = "/add")
     public @ResponseBody String addNewCharacter (
@@ -43,7 +46,7 @@ public class MainController {
     @GetMapping(path = "/{keyword}")
     public @ResponseBody
     Iterable<Character> getCharByKeyword(@PathVariable("keyword") String keyword){
-        return charRepository.findCharByKeyword(keyword);
+        return charRepositoryCustomimpl.findCharByKeyword(keyword);
     }
 
     @GetMapping(path = "/rnd")
