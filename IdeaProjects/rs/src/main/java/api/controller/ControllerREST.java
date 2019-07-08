@@ -37,7 +37,7 @@ public class ControllerREST {
         return charRepository.getRandomChar();
     }
 
-    /*  @GetMapping(path = "/add")
+    /*  @GetMapping(path = "/character/add/new")
     public @ResponseBody String addNewCharacter (
             @RequestParam String name, @RequestParam String status,
             @RequestParam String species, @RequestParam String gender,
