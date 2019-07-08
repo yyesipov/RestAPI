@@ -18,20 +18,20 @@ public class ControllerREST {
     private CharRepository charRepository;
 
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/characters")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public @ResponseBody
     Iterable<Character> getAllCharacters(){
         return charRepository.findAll();
     }
 
-    @GetMapping(path = "/{keyword}")
+    @GetMapping(path = "/character/{keyword}")
     public @ResponseBody
     Iterable<Character> getCharByKeyword(@PathVariable("keyword") String keyword){
         return charRepository.findCharByKeyword(keyword);
     }
 
-    @GetMapping(path = "/rnd")
+    @GetMapping(path = "/character")
     public @ResponseBody
    Character getRandomChar(){
         return charRepository.getRandomChar();
