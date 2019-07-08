@@ -1,4 +1,4 @@
-package hello;
+package api.model;
 
 
 import javax.persistence.*;
@@ -78,4 +78,6 @@ public class Character implements Serializable{
     public void setUrl(String url) {
         this.url = url;
     }
+
+
 }
