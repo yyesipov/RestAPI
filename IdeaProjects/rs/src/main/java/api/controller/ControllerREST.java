@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 @RestController
 @RequestMapping(path="/api")
+@Produces(value = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class ControllerREST {
 
 
@@ -19,7 +20,6 @@ public class ControllerREST {
 
 
     @GetMapping(path = "/characters")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public @ResponseBody
     Iterable<Character> getAllCharacters(){
         return charRepository.findAll();
@@ -33,24 +33,14 @@ public class ControllerREST {
 
     @GetMapping(path = "/character")
     public @ResponseBody
-   Character getRandomChar(){
+    Character getRandomChar(){
         return charRepository.getRandomChar();
     }
 
-    /*  @GetMapping(path = "/character/add/new")
-    public @ResponseBody String addNewCharacter (
-            @RequestParam String name, @RequestParam String status,
-            @RequestParam String species, @RequestParam String gender,
-            @RequestParam String image, @RequestParam String url) {
-        Character character = new Character();
-        character.setName(name);
-        character.setStatus(status);
-        character.setSpecies(species);
-        character.setGender(gender);
-        character.setImage(image);
-        character.setUrl(url);
-        charRepository.save(character);
-        return "Saved";
-    }*/
+    @PostMapping(path = "/character/post")
+           public @ResponseBody Character addNewCharacter (Character character){
+
+        return charRepository.save(character);
+    }
 
 }
