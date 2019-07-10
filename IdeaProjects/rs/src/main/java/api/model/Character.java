@@ -11,20 +11,39 @@ import java.io.Serializable;
 public class Character implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue
     private Integer id;
 
+    @Column
     private String name;
 
+    @Column
     private String status;
 
+    @Column
     private String species;
 
+    @Column
     private String gender;
 
+    @Column
     private  String image;
 
+    @Column
     private  String url;
+
+    public Character() {
+    }
+
+    public Character(Integer id, String name, String status, String species, String gender, String image, String url) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.species = species;
+        this.gender = gender;
+        this.image = image;
+        this.url = url;
+    }
 
     public Integer getId() {
         return id;
