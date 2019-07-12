@@ -4,6 +4,7 @@ package api.servise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import api.model.Character;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class ScheduledTasks {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-//    @Scheduled(cron = "0 * * * * ?")
+    //    @Scheduled(cron = "0 * * * * ?")
     @Scheduled(fixedRate = 10000)
     public static void getAndSaveCharacters() {
 
@@ -49,40 +50,41 @@ public class ScheduledTasks {
         System.out.println(result);*/
 
 
-
-
-
         RestTemplate restTemplate = new RestTemplate();
 
+        ResponseEntity<List<Character>> response = restTemplate.exchange(
+                GET_ENDPOINT_URL,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Character>>() {});
+        List<Character> characters = response.getBody();
+        System.out.println(characters);
 
-        HttpHeaders headers = new HttpHeaders();
+
+       /* HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity < String > entity = new HttpEntity < String > ("parameters", headers);
 
         ResponseEntity<Character> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, entity,
                 Character.class);
 
+        System.out.println(result);*/
+
+       /* Character[] result = restTemplate.getForObject(GET_ENDPOINT_URL, Character[].class);
         System.out.println(result);
-/*
-
-        Character[] list = restTemplate.getForObject(GET_ENDPOINT_URL, Character[].class);
-        System.out.println("Character: " + list.toString());
-*/
 
 
-       /* if (result != null) {
-            for (Character ch : result) {*/
+        if (result != null) {
+            for (Character ch : result) {
 
-                restTemplate.postForObject(POST_ENDPOINT_URL, result, Character.class);
-                               
+                restTemplate.postForObject(POST_ENDPOINT_URL, ch, Character.class);
+
 //            }
 
-        logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+                logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+            }
+
+
+        }*/
     }
-
-
-
-
-
-
 }

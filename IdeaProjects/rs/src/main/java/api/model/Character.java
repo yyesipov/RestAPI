@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Character implements Serializable{
 
     @Id
@@ -24,25 +27,34 @@ public class Character implements Serializable{
     private String species;
 
     @Column
-    private String gender;
+    private String type;
+
+    @Column
+    private  String gender;
+
+
+    @OneToOne
+    @JoinColumn(name="origin_id")
+    Origin origin;
+
+
+    @OneToOne
+    @JoinColumn(name="location_id")
+    Location location;
 
     @Column
     private  String image;
 
     @Column
-    private  String url;
+    private List<String> episode = new ArrayList<String>();
+
+    @Column
+    private String url;
+
+    @Column
+    private String created;
 
     public Character() {
-    }
-
-    public Character(Integer id, String name, String status, String species, String gender, String image, String url) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.species = species;
-        this.gender = gender;
-        this.image = image;
-        this.url = url;
     }
 
     public Integer getId() {
@@ -77,12 +89,36 @@ public class Character implements Serializable{
         this.species = species;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Origin getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Origin origin) {
+        this.origin = origin;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getImage() {
@@ -93,6 +129,14 @@ public class Character implements Serializable{
         this.image = image;
     }
 
+    public List<String> getEpisode() {
+        return episode;
+    }
+
+    public void setEpisode(List<String> episode) {
+        this.episode = episode;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -101,5 +145,11 @@ public class Character implements Serializable{
         this.url = url;
     }
 
+    public String getCreated() {
+        return created;
+    }
 
+    public void setCreated(String created) {
+        this.created = created;
+    }
 }
