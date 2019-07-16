@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "character")
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class Character implements Serializable{
 
@@ -17,7 +18,7 @@ public class Character implements Serializable{
 @GeneratedValue
     private Integer id;
 
-    @Column
+    @Column (name = "name")
     private String name;
 
     @Column
@@ -46,7 +47,7 @@ public class Character implements Serializable{
     private  String image;
 
     @Column
-    private List<String> episode = new ArrayList<String>();
+    private String episode ;
 
     @Column
     private String url;
@@ -55,6 +56,23 @@ public class Character implements Serializable{
     private String created;
 
     public Character() {
+    }
+
+    public Character(String name, String status, String species,
+                     String type, String gender, Origin origin,
+                     Location location, String image, String episode,
+                     String url, String created) {
+        this.name = name;
+        this.status = status;
+        this.species = species;
+        this.type = type;
+        this.gender = gender;
+        this.origin = origin;
+        this.location = location;
+        this.image = image;
+        this.episode = episode;
+        this.url = url;
+        this.created = created;
     }
 
     public Integer getId() {
@@ -129,11 +147,11 @@ public class Character implements Serializable{
         this.image = image;
     }
 
-    public List<String> getEpisode() {
+    public String getEpisode() {
         return episode;
     }
 
-    public void setEpisode(List<String> episode) {
+    public void setEpisode(String episode) {
         this.episode = episode;
     }
 

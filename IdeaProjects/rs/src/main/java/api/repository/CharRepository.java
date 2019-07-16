@@ -15,6 +15,8 @@ public interface CharRepository extends CrudRepository <Character, Integer>{
 
   @Query ( value = "SELECT * FROM Character c  ORDER BY random() LIMIT 1", nativeQuery = true)
   Character getRandomChar();
+
+
 }
 
 

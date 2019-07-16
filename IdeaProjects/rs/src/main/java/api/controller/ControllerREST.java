@@ -37,10 +37,10 @@ public class ControllerREST {
         return charRepository.getRandomChar();
     }
 
-    @PostMapping(path = "/character/post")
-           public @ResponseBody Character addNewCharacter (Character character){
 
+    public Character addNewCharacter (Character character){
         return charRepository.save(character);
     }
+
 
 }

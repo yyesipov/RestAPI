@@ -1,6 +1,16 @@
 package api.servise;
 
 //import api.controller.Controller;
+import api.controller.ControllerREST;
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import api.model.Character;
@@ -10,10 +20,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.StringReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ScheduledTasks {
@@ -27,64 +40,42 @@ public class ScheduledTasks {
     @Scheduled(fixedRate = 10000)
     public static void getAndSaveCharacters() {
 
-       /* // HttpHeaders
-        HttpHeaders headers = new HttpHeaders();
-
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
-        // Request to return JSON format
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("my_other_key", "my_other_value");
-
-        // HttpEntity<String>: To get result as String.
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-        // RestTemplate
-        RestTemplate restTemplate = new RestTemplate();
-
-        // Send request with GET method, and Headers.
-        ResponseEntity<String> response = restTemplate.exchange(GET_ENDPOINT_URL, //
-                HttpMethod.GET, entity, String.class);
-
-        String result = response.getBody();
-
-        System.out.println(result);*/
+        ControllerREST controllerREST = new ControllerREST();
 
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<List<Character>> response = restTemplate.exchange(
-                GET_ENDPOINT_URL,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Character>>() {});
-        List<Character> characters = response.getBody();
-        System.out.println(characters);
 
-
-       /* HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity < String > entity = new HttpEntity < String > ("parameters", headers);
-
-        ResponseEntity<Character> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, entity,
-                Character.class);
-
-        System.out.println(result);*/
-
-       /* Character[] result = restTemplate.getForObject(GET_ENDPOINT_URL, Character[].class);
+        ResponseEntity<JSONObject> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
+                JSONObject.class);
         System.out.println(result);
 
+        JSONObject jsonObject = new JSONObject(result.getBody());
+        System.out.println(jsonObject);
 
-        if (result != null) {
+
+//        Gson gson = new Gson();
+
+        String jsonString = jsonObject.getAsString("results");
+        System.out.println(jsonString);
+
+
+        List<JSONArray> jsonArray = JSON.parseArray(jsonString, JSONArray.class);
+        System.out.println(jsonArray);
+
+
+
+       /* if (result != null) {
             for (Character ch : result) {
 
-                restTemplate.postForObject(POST_ENDPOINT_URL, ch, Character.class);
-
-//            }
-
-                logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+                controllerREST.addNewCharacter(ch);
             }
 
+                logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+            }*/
 
-        }*/
+
+        }
     }
-}
+
+

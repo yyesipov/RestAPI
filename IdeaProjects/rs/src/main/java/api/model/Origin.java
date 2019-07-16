@@ -1,12 +1,10 @@
 package api.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "origin")
 public class Origin implements Serializable{
 
     @Id
@@ -20,6 +18,11 @@ public class Origin implements Serializable{
     private String url;
 
     public Origin() {
+    }
+
+    public Origin(String name, String url) {
+        this.name = name;
+        this.url = url;
     }
 
     public Integer getId() {
