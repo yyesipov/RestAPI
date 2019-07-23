@@ -15,7 +15,7 @@ import java.util.Set;
 public class Character implements Serializable{
 
     @Id
-@GeneratedValue
+//@GeneratedValue
     private Integer id;
 
     @Column (name = "name")
