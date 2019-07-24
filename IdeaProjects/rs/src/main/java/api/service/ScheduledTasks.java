@@ -1,35 +1,21 @@
-package api.servise;
+package api.service;
 
-//import api.controller.Controller;
+
 import api.controller.ControllerREST;
-import com.alibaba.fastjson.JSON;
+import api.model.MainEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import api.model.Character;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.DataInput;
 import java.io.IOException;
-import java.io.StringReader;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class ScheduledTasks {
@@ -49,11 +35,11 @@ public class ScheduledTasks {
         RestTemplate restTemplate = new RestTemplate();
 
 
-        ResponseEntity<JSONObject> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
-                JSONObject.class);
-        System.out.println(result);
+        ResponseEntity<MainEntity> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
+                MainEntity.class);
+        System.out.println(result.toString());
 
-        JSONObject jsonObject = new JSONObject(result.getBody());
+      /*  JSONObject jsonObject = new JSONObject(result.getBody());
         System.out.println(jsonObject);
 
         String jsonToJsonString = jsonObject.toJSONString();
@@ -62,7 +48,7 @@ public class ScheduledTasks {
         String jsonObjectAsString = jsonObject.getAsString("results");
         System.out.println("getAsString(): " + jsonObjectAsString);
 
-        System.out.println(toJavaObjects(jsonToJsonString));
+        System.out.println(toJavaObjects(jsonToJsonString));*/
 /*
         List<JSONArray> jsonArray = JSON.parseArray(jsonObject.toJSONString(), JSONArray.class);
         System.out.println(jsonArray);*/

@@ -1,57 +1,30 @@
 package api.model;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "character")
-//@JsonIgnoreProperties(ignoreUnknown = true)
-public class Character implements Serializable{
 
-    @Id
-//@GeneratedValue
+
+public class Result implements Serializable{
+
     private Integer id;
     private String name;
     private String status;
     private String species;
     private String type;
     private String gender;
-
-    @OneToOne
-    @JoinColumn(name="origin_id")
-    Origin origin;
-
-    @OneToOne
-    @JoinColumn(name="location_id")
-   Location location;
-
+    private Origin origin;
+    private Location location;
     private String image;
     private String episode ;
     private String url;
     private String created;
 
-    public Character() {
+    public Result() {
     }
 
-    public Character(String name, String status, String species,
-                     String type, String gender, Origin origin,
-                     Location location, String image, String episode,
-                     String url, String created) {
-        this.name = name;
-        this.status = status;
-        this.species = species;
-        this.type = type;
-        this.gender = gender;
-        this.origin = origin;
-        this.location = location;
-        this.image = image;
-        this.episode = episode;
-        this.url = url;
-        this.created = created;
-    }
-
-    public Integer getId() {
+      public Integer getId() {
         return id;
     }
 
