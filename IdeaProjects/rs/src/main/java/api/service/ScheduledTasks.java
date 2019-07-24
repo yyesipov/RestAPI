@@ -2,11 +2,11 @@ package api.service;
 
 
 import api.controller.ControllerREST;
-import api.model.MainEntity;
+import api.model.input.MainEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import api.model.Character;
+import api.model.forDB.Character;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

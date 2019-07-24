@@ -1,4 +1,4 @@
-package api.model;
+package api.model.input;
 
 import java.io.Serializable;
 

@@ -1,11 +1,11 @@
-package api.model;
+package api.model.forDB;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "location")
-public class Location implements Serializable{
+@Table(name = "origin")
+public class Origin implements Serializable{
 
     @Id
     @GeneratedValue
@@ -17,10 +17,10 @@ public class Location implements Serializable{
     @Column
     private String url;
 
-    public Location() {
+    public Origin() {
     }
 
-    public Location(String name, String url) {
+    public Origin(String name, String url) {
         this.name = name;
         this.url = url;
     }
@@ -49,4 +49,3 @@ public class Location implements Serializable{
         this.url = url;
     }
 }
-

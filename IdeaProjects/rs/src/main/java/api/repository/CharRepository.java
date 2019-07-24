@@ -1,6 +1,6 @@
 package api.repository;
 
-import api.model.Character;
+import api.model.forDB.Character;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

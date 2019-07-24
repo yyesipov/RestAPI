@@ -1,4 +1,4 @@
-package api.model;
+package api.model.forDB;
 
 
 import javax.persistence.*;

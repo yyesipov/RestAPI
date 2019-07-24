@@ -1,7 +1,5 @@
-package api.model;
+package api.model.input;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 
@@ -14,8 +12,8 @@ public class Result implements Serializable{
     private String species;
     private String type;
     private String gender;
-    private Origin origin;
-    private Location location;
+    private OriginIn origin;
+    private LocationIn location;
     private String image;
     private String episode ;
     private String url;
@@ -24,7 +22,7 @@ public class Result implements Serializable{
     public Result() {
     }
 
-      public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -72,19 +70,19 @@ public class Result implements Serializable{
         this.gender = gender;
     }
 
-    public Origin getOrigin() {
+    public OriginIn getOrigin() {
         return origin;
     }
 
-    public void setOrigin(Origin origin) {
+    public void setOrigin(OriginIn origin) {
         this.origin = origin;
     }
 
-    public Location getLocation() {
+    public LocationIn getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationIn location) {
         this.location = location;
     }
 

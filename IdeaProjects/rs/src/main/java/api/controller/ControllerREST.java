@@ -1,7 +1,7 @@
 package api.controller;
 
 import api.repository.CharRepository;
-import api.model.Character;
+import api.model.forDB.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
