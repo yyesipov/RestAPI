@@ -38,8 +38,8 @@ public class ControllerREST {
     }
 
 
-    public Character addNewCharacter (Character character){
-        return charRepository.save(character);
+    public void addNewCharacter (Character character){
+       charRepository.save(character);
     }
 
 

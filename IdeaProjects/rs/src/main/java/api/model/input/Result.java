@@ -1,10 +1,14 @@
 package api.model.input;
 
+import api.model.forDB.Character;
+import api.model.forDB.Location;
+import api.model.forDB.Origin;
+
 import java.io.Serializable;
+import java.util.List;
 
 
-
-public class Result implements Serializable{
+public class Result extends Character implements Serializable{
 
     private Integer id;
     private String name;
@@ -15,7 +19,7 @@ public class Result implements Serializable{
     private OriginIn origin;
     private LocationIn location;
     private String image;
-    private String episode ;
+    private List<String> episode ;
     private String url;
     private String created;
 
@@ -70,7 +74,7 @@ public class Result implements Serializable{
         this.gender = gender;
     }
 
-    public OriginIn getOrigin() {
+    public Origin getOrigin() {
         return origin;
     }
 
@@ -78,7 +82,7 @@ public class Result implements Serializable{
         this.origin = origin;
     }
 
-    public LocationIn getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -95,10 +99,10 @@ public class Result implements Serializable{
     }
 
     public String getEpisode() {
-        return episode;
+        return episode.toString();
     }
 
-    public void setEpisode(String episode) {
+    public void setEpisode(List<String> episode) {
         this.episode = episode;
     }
 
@@ -116,5 +120,23 @@ public class Result implements Serializable{
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", species='" + species + '\'' +
+                ", type='" + type + '\'' +
+                ", gender='" + gender + '\'' +
+                ", origin=" + origin +
+                ", location=" + location +
+                ", image='" + image + '\'' +
+                ", episode=" + episode +
+                ", url='" + url + '\'' +
+                ", created='" + created + '\'' +
+                '}';
     }
 }

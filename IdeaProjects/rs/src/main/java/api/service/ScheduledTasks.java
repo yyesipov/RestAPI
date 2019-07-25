@@ -3,6 +3,7 @@ package api.service;
 
 import api.controller.ControllerREST;
 import api.model.input.MainEntity;
+import api.model.input.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -27,62 +29,31 @@ public class ScheduledTasks {
 
     //    @Scheduled(cron = "0 * * * * ?")
     @Scheduled(fixedRate = 10000)
-    public static void getAndSaveCharacters() throws IOException, ClassNotFoundException {
+    public static void getAndSaveCharacters() {
 
         ControllerREST controllerREST = new ControllerREST();
 
-
         RestTemplate restTemplate = new RestTemplate();
-
 
         ResponseEntity<MainEntity> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
                 MainEntity.class);
-        System.out.println(result.toString());
 
-      /*  JSONObject jsonObject = new JSONObject(result.getBody());
-        System.out.println(jsonObject);
+        List<Result> resultList = result.getBody().getResults();
 
-        String jsonToJsonString = jsonObject.toJSONString();
-        System.out.println("toJSONString(): " + jsonToJsonString);
-
-        String jsonObjectAsString = jsonObject.getAsString("results");
-        System.out.println("getAsString(): " + jsonObjectAsString);
-
-        System.out.println(toJavaObjects(jsonToJsonString));*/
-/*
-        List<JSONArray> jsonArray = JSON.parseArray(jsonObject.toJSONString(), JSONArray.class);
-        System.out.println(jsonArray);*/
-
-       /* if (result != null) {
-            for (Character ch : result) {
-
-                controllerREST.addNewCharacter(ch);
+        if (resultList != null) {
+            for (Result res : resultList) {
+                controllerREST.addNewCharacter(res);
+                System.out.println(res.toString());
             }
-                logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
-            }*/
+            logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
         }
-
-    public static  <T> List<T> parseJsonArray(String json, Class<T> classOnWhichArrayIsDefined)
-            throws IOException, ClassNotFoundException {
-        ObjectMapper mapper = new ObjectMapper();
-        Class<T[]> arrayClass = (Class<T[]>) Class.forName("[L" + classOnWhichArrayIsDefined.getName() + ";");
-        T[] objects = mapper.readValue(json, arrayClass);
-        return Arrays.asList(objects);
-    }
-
-    public static  List<Character> toJavaObjects(String json) throws IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        List<Character> characters = mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, Character.class));
-        return characters;
-    }
-
-    public static  Character[] toJavaObjects2(String json) throws IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        Character[] characters = mapper.readValue(json, Character[].class);
-        return characters;
     }
 
 
     }
+
+
+
+
 
 

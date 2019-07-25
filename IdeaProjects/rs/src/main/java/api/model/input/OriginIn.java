@@ -1,6 +1,8 @@
 package api.model.input;
 
-public class OriginIn {
+import api.model.forDB.Origin;
+
+public class OriginIn extends Origin {
 
     String name;
     String url;
@@ -22,5 +24,13 @@ public class OriginIn {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "OriginIn{" +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

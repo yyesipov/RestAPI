@@ -12,8 +12,8 @@ public class MainEntity implements Serializable{
     public MainEntity() {
     }
 
-    public Info getInfo() {
-        return info;
+       public Info getInfo() {
+        return null;
     }
 
     public void setInfo(Info info) {
@@ -26,5 +26,13 @@ public class MainEntity implements Serializable{
 
     public void setResults(List<Result> results) {
         this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "MainEntity{" +
+                "info=" + info +
+                ", results=" + results +
+                '}';
     }
 }

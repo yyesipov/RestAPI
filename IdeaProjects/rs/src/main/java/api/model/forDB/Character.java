@@ -3,6 +3,7 @@ package api.model.forDB;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "character")
@@ -32,23 +33,6 @@ public class Character implements Serializable{
     private String created;
 
     public Character() {
-    }
-
-    public Character(String name, String status, String species,
-                     String type, String gender, Origin origin,
-                     Location location, String image, String episode,
-                     String url, String created) {
-        this.name = name;
-        this.status = status;
-        this.species = species;
-        this.type = type;
-        this.gender = gender;
-        this.origin = origin;
-        this.location = location;
-        this.image = image;
-        this.episode = episode;
-        this.url = url;
-        this.created = created;
     }
 
     public Integer getId() {
@@ -145,5 +129,23 @@ public class Character implements Serializable{
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", species='" + species + '\'' +
+                ", type='" + type + '\'' +
+                ", gender='" + gender + '\'' +
+                ", origin=" + origin +
+                ", location=" + location +
+                ", image='" + image + '\'' +
+                ", episode='" + episode + '\'' +
+                ", url='" + url + '\'' +
+                ", created='" + created + '\'' +
+                '}';
     }
 }

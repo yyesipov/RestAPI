@@ -1,6 +1,8 @@
 package api.model.input;
 
-public class LocationIn {
+import api.model.forDB.Location;
+
+public class LocationIn extends Location {
 
     String name;
     String url;
@@ -22,5 +24,13 @@ public class LocationIn {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "LocationIn{" +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }
