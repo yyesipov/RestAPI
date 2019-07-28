@@ -3,7 +3,7 @@ package api.model.forDB;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "character")
@@ -28,7 +28,10 @@ public class Character implements Serializable{
    Location location;
 
     private String image;
-    private String episode ;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "character")
+    private Set<Episode> episode;
+
     private String url;
     private String created;
 
@@ -107,11 +110,11 @@ public class Character implements Serializable{
         this.image = image;
     }
 
-    public String getEpisode() {
+    public Set<Episode> getEpisode() {
         return episode;
     }
 
-    public void setEpisode(String episode) {
+    public void setEpisode(Set<Episode> episode) {
         this.episode = episode;
     }
 
@@ -143,7 +146,7 @@ public class Character implements Serializable{
                 ", origin=" + origin +
                 ", location=" + location +
                 ", image='" + image + '\'' +
-                ", episode='" + episode + '\'' +
+                ", episode=" + episode +
                 ", url='" + url + '\'' +
                 ", created='" + created + '\'' +
                 '}';

@@ -1,14 +1,13 @@
 package api.model.input;
 
-import api.model.forDB.Character;
-import api.model.forDB.Location;
-import api.model.forDB.Origin;
+import api.model.forDB.Episode;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 
-public class Result extends Character implements Serializable{
+public class Result implements Serializable{
 
     private Integer id;
     private String name;
@@ -19,7 +18,7 @@ public class Result extends Character implements Serializable{
     private OriginIn origin;
     private LocationIn location;
     private String image;
-    private List<String> episode ;
+    private Set<String> episode ;
     private String url;
     private String created;
 
@@ -74,7 +73,7 @@ public class Result extends Character implements Serializable{
         this.gender = gender;
     }
 
-    public Origin getOrigin() {
+    public OriginIn getOrigin() {
         return origin;
     }
 
@@ -82,7 +81,7 @@ public class Result extends Character implements Serializable{
         this.origin = origin;
     }
 
-    public Location getLocation() {
+    public LocationIn getLocation() {
         return location;
     }
 
@@ -98,11 +97,11 @@ public class Result extends Character implements Serializable{
         this.image = image;
     }
 
-    public String getEpisode() {
-        return episode.toString();
+    public Set<String> getEpisode() {
+        return episode;
     }
 
-    public void setEpisode(List<String> episode) {
+    public void setEpisode(Set<String> episode) {
         this.episode = episode;
     }
 

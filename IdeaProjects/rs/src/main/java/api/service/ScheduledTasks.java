@@ -11,6 +11,7 @@ import api.model.forDB.Character;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Service
 public class ScheduledTasks {
 
     static final String GET_ENDPOINT_URL = "https://rickandmortyapi.com/api/character";
@@ -43,7 +45,7 @@ public class ScheduledTasks {
         if (resultList != null) {
             for (Result res : resultList) {
                 controllerREST.addNewCharacter(res);
-                System.out.println(res.toString());
+//                System.out.println(res.toString());
             }
             logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
         }
