@@ -2,7 +2,9 @@ package api.model.input;
 
 import api.model.forDB.Location;
 
-public class LocationIn extends Location {
+import java.io.Serializable;
+
+public class LocationIn extends Location implements Serializable {
 
     String name;
     String url;

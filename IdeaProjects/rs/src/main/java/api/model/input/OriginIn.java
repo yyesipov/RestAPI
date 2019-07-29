@@ -2,7 +2,9 @@ package api.model.input;
 
 import api.model.forDB.Origin;
 
-public class OriginIn extends Origin {
+import java.io.Serializable;
+
+public class OriginIn extends Origin implements Serializable {
 
     String name;
     String url;

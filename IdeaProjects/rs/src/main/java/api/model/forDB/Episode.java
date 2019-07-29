@@ -8,15 +8,15 @@ import java.io.Serializable;
 public class Episode implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     private String url;
 
     @ManyToOne
-    @JoinColumn
-    Character character;
+    @JoinColumn(name = "character_id")
+    private Character character;
 
     public Integer getId() {
         return id;

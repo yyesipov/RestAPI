@@ -44,6 +44,7 @@ public class ScheduledTasks {
         ResponseEntity<MainEntity> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
                 MainEntity.class);
 
+
         List<Result> resultList = result.getBody().getResults();
 
         if (resultList != null) {

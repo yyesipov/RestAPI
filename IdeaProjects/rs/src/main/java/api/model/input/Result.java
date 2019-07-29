@@ -1,9 +1,6 @@
 package api.model.input;
 
-import api.model.forDB.Episode;
-
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 

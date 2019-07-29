@@ -2,13 +2,14 @@ package api.model.forDB;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "origin")
 public class Origin implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -17,12 +18,10 @@ public class Origin implements Serializable{
     @Column
     private String url;
 
-    public Origin() {
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+    private Set<Character> character;
 
-    public Origin(String name, String url) {
-        this.name = name;
-        this.url = url;
+    public Origin() {
     }
 
     public Integer getId() {
@@ -49,12 +48,21 @@ public class Origin implements Serializable{
         this.url = url;
     }
 
+    public Set<Character> getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Set<Character> character) {
+        this.character = character;
+    }
+
     @Override
     public String toString() {
         return "Origin{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", character=" + character +
                 '}';
     }
 }

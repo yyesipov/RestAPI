@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Location implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column

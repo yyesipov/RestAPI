@@ -11,7 +11,7 @@ import java.util.Set;
 public class Character implements Serializable{
 
     @Id
-//@GeneratedValue
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String status;
@@ -19,13 +19,13 @@ public class Character implements Serializable{
     private String type;
     private String gender;
 
-    @OneToOne
-    @JoinColumn(name="origin_id")
-    Origin origin;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name="character_id")
+    private Origin origin;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="location_id")
-   Location location;
+    private Location location;
 
     private String image;
 
