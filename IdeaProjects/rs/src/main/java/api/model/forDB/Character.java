@@ -11,7 +11,7 @@ import java.util.Set;
 public class Character implements Serializable{
 
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String status;
@@ -20,10 +20,10 @@ public class Character implements Serializable{
     private String gender;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name="character_id")
+    @JoinColumn(name="origin_id")
     private Origin origin;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name="location_id")
     private Location location;
 

@@ -2,6 +2,8 @@ package api.model.forDB;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "location")
@@ -17,12 +19,10 @@ public class Location implements Serializable{
     @Column
     private String url;
 
-    public Location() {
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
+    private Set<Character> characters;
 
-    public Location(String name, String url) {
-        this.name = name;
-        this.url = url;
+    public Location() {
     }
 
     public Integer getId() {
@@ -49,12 +49,21 @@ public class Location implements Serializable{
         this.url = url;
     }
 
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", characters=" + characters +
                 '}';
     }
 }

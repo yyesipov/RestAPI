@@ -18,7 +18,7 @@ public class Origin implements Serializable{
     @Column
     private String url;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin", fetch = FetchType.EAGER)
     private Set<Character> character;
 
     public Origin() {

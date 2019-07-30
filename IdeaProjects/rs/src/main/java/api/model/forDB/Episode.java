@@ -14,7 +14,7 @@ public class Episode implements Serializable{
     @Column
     private String url;
 
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "character_id")
     private Character character;
 

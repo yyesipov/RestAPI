@@ -79,16 +79,14 @@ public class ScheduledTasks {
 
         character.setUrl(result.getUrl());
         character.setCreated(result.getCreated());
-        System.out.println("ControllerREST OUT character: " + character.toString());
 
-//        if (charRepository != null){
-
+        if (charRepository != null){
         charRepository.save(character);
-
-  /*          System.out.println("Character " + character.getId() + " is saved!");}
+            System.out.println("Character " + character.getId() + " is saved!" +
+                    " Locatoin: " + character.getLocation().toString());}
        else {
-            System.out.println("ERROR: Not saved - charRepository is null");
-        }*/
+            System.out.println("ERROR: Not saved - charRepository is null!");
+        }
 
     }
     }
