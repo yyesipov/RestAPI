@@ -18,8 +18,8 @@ public class Origin implements Serializable{
     @Column
     private String url;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin", fetch = FetchType.EAGER)
-    private Set<Character> character;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+    Set<Character> characters;
 
     public Origin() {
     }
@@ -48,21 +48,19 @@ public class Origin implements Serializable{
         this.url = url;
     }
 
-    public Set<Character> getCharacter() {
-        return character;
+    public Set<Character> getCharacters() {
+        return characters;
     }
 
-    public void setCharacter(Set<Character> character) {
-        this.character = character;
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
     }
 
     @Override
     public String toString() {
         return "Origin{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", character=" + character +
                 '}';
     }
 }

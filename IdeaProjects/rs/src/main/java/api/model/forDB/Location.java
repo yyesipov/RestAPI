@@ -19,8 +19,8 @@ public class Location implements Serializable{
     @Column
     private String url;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
-    private Set<Character> characters;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    Set<Character> characters;
 
     public Location() {
     }
@@ -60,10 +60,8 @@ public class Location implements Serializable{
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", characters=" + characters +
                 '}';
     }
 }

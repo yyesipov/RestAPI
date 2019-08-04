@@ -1,46 +1,40 @@
 package api.controller;
 
 import api.model.forDB.Character;
-import api.model.forDB.Origin;
 import api.repository.CharRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
+import java.util.List;
 
 
 @RestController
 @RequestMapping(path="/api")
-@Produces(value = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces(value = {MediaType.APPLICATION_JSON})
 public class ControllerREST {
 
     @Autowired
     private CharRepository charRepository;
 
-    @GetMapping(path = "/characters")
+    @GetMapping(path = "/characters", produces = "application/json")
     public @ResponseBody
     Iterable<Character> getAllCharacters(){
         return charRepository.findAll();
     }
 
-    @GetMapping(path = "/character/{keyword}")
+    @GetMapping(path = "/character/{keyword}", produces = "application/json")
     public @ResponseBody
-    Iterable<Character> getCharByKeyword(@PathVariable("keyword") String keyword){
+    List<Character> getCharByKeyword(@PathVariable("keyword") String keyword){
         return charRepository.findCharByKeyword(keyword);
     }
 
-    @GetMapping(path = "/character")
+    @GetMapping(path = "/character", produces = "application/json")
     public @ResponseBody
     Character getRandomChar(){
         return charRepository.getRandomChar();
     }
-
-   /* Origin isExist (String name){
-        return charRepository.isExist(name);
-  }*/
-
 
 
 }

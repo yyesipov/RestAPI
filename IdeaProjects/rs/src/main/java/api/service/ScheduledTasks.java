@@ -47,7 +47,7 @@ public class ScheduledTasks {
     private OrigRepository origRepository;
 
     //    @Scheduled(cron = "0 * * * * ?")
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3600000)
     public void getAndSaveCharacters() {
 
         RestTemplate restTemplate = new RestTemplate();
@@ -55,9 +55,7 @@ public class ScheduledTasks {
         ResponseEntity<MainEntity> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
                 MainEntity.class);
 
-        MainEntity body = result.getBody();
-        Info info = body.getInfo();
-        long pages = info.getPages();
+        long pages = result.getBody().getInfo().getPages();
 
         for (int i = 1; i <= pages; i++) {
                 result = restTemplate.exchange("https://rickandmortyapi.com/api/character/?page=" + i,
@@ -68,12 +66,10 @@ public class ScheduledTasks {
                 if (resultList != null) {
                     for (Result res : resultList) {
                         addNewCharacter(res);
-                System.out.println(res.toString());
                     }
-                    logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
                 }
-
         }
+        logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
     }
 
     public void addNewCharacter(Result result){
@@ -86,12 +82,14 @@ public class ScheduledTasks {
         character.setSpecies(result.getSpecies());
         character.setType(result.getType());
         character.setGender(result.getGender());
-        if (origRepository.isExistOrigin(result.getOriginIn().getName()) == null){
+        character.setOrigin(result.getOriginIn());
+        character.setLocation(result.getLocationIn());
+        /*if (origRepository.isExistOrigin(result.getOriginIn().getName()) == null){
             character.setOrigin(result.getOriginIn());
         }
         if (locRepository.isExistLocation(result.getLocationIn().getName()) == null) {
             character.setLocation(result.getLocationIn());
-        }
+        }*/
         character.setImage(result.getImage());
 
         List<String> s =result.getEpisode();
@@ -101,11 +99,12 @@ public class ScheduledTasks {
         }
         character.setUrl(result.getUrl());
         character.setCreated(result.getCreated());
-        System.out.println("Character for save: " + character);
+
         if (charRepository != null){
         charRepository.save(character);
-            System.out.println("Character " + character.getId() + " is saved!" +
-                    " Locatoin: " + character.getLocation().toString());}
+            System.out.println("Character " + character.getId() + " is saved!" + character.toString());
+            /*System.out.println("Character " + character.getId() + " is saved!" +
+                    " Locatoin: " + character.getLocation().toString()+ " Origin: " + character.getOrigin().toString()) ;*/}
        else {
             System.out.println("ERROR: Not saved - charRepository is null!");
         }

@@ -13,7 +13,7 @@ import java.util.Set;
 public class Character implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String status;
@@ -21,18 +21,18 @@ public class Character implements Serializable{
     private String type;
     private String gender;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="origin_id")
-    private Origin origin;
+    Origin origin;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="location_id")
-    private Location location;
+    Location location;
 
     private String image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "character")
-    private Set<Episode> episode;
+    Set<Episode> episode;
 
     private String url;
     private String created;

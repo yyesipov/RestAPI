@@ -14,9 +14,9 @@ public class Episode implements Serializable{
     @Column
     private String url;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne //(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "character_id")
-    private Character character;
+    Character character;
 
     public int getId() {
         return id;
@@ -46,8 +46,6 @@ public class Episode implements Serializable{
     public String toString() {
         return "Episode{" +
                 "id=" + id +
-                ", url='" + url + '\'' +
-                ", character=" + character +
-                '}';
+                ", url='" + url + '}';
     }
 }
