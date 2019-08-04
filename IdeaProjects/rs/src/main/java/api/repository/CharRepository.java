@@ -1,6 +1,8 @@
 package api.repository;
 
 import api.model.forDB.Character;
+import api.model.forDB.Location;
+import api.model.forDB.Origin;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +19,6 @@ public interface CharRepository extends CrudRepository <Character, Integer>{
 
   @Query ( value = "SELECT * FROM Character c  ORDER BY random() LIMIT 1", nativeQuery = true)
   Character getRandomChar();
-
 
 }
 

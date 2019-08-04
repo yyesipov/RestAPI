@@ -1,6 +1,7 @@
 package api.model.input;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,7 +16,7 @@ public class Result implements Serializable{
     private OriginIn origin;
     private LocationIn location;
     private String image;
-    private Set<String> episode ;
+    private List<String> episode ;
     private String url;
     private String created;
 
@@ -70,7 +71,7 @@ public class Result implements Serializable{
         this.gender = gender;
     }
 
-    public OriginIn getOrigin() {
+    public OriginIn getOriginIn() {
         return origin;
     }
 
@@ -78,7 +79,7 @@ public class Result implements Serializable{
         this.origin = origin;
     }
 
-    public LocationIn getLocation() {
+    public LocationIn getLocationIn() {
         return location;
     }
 
@@ -94,11 +95,11 @@ public class Result implements Serializable{
         this.image = image;
     }
 
-    public Set<String> getEpisode() {
+    public List<String> getEpisode() {
         return episode;
     }
 
-    public void setEpisode(Set<String> episode) {
+    public void setEpisode(List<String> episode) {
         this.episode = episode;
     }
 

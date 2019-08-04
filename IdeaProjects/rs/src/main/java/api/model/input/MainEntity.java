@@ -12,8 +12,8 @@ public class MainEntity implements Serializable{
     public MainEntity() {
     }
 
-       public Info getInfo() {
-        return null;
+    public Info getInfo() {
+        return info;
     }
 
     public void setInfo(Info info) {

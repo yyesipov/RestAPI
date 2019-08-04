@@ -43,4 +43,14 @@ public class Info implements Serializable{
     public void setPrev(String prev) {
         this.prev = prev;
     }
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "count=" + count +
+                ", pages=" + pages +
+                ", next='" + next + '\'' +
+                ", prev='" + prev + '\'' +
+                '}';
+    }
 }

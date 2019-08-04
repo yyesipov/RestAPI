@@ -9,7 +9,7 @@ public class Episode implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column
     private String url;
@@ -18,11 +18,11 @@ public class Episode implements Serializable{
     @JoinColumn(name = "character_id")
     private Character character;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

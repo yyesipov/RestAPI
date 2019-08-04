@@ -2,9 +2,14 @@ package api.service;
 
 
 import api.controller.ControllerREST;
+import api.model.forDB.Episode;
+import api.model.forDB.Origin;
+import api.model.input.Info;
 import api.model.input.MainEntity;
 import api.model.input.Result;
 import api.repository.CharRepository;
+import api.repository.LocRepository;
+import api.repository.OrigRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +25,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -27,13 +33,18 @@ import java.util.Set;
 @Service
 public class ScheduledTasks {
 
-    static final String GET_ENDPOINT_URL = "https://rickandmortyapi.com/api/character";
-    static final String POST_ENDPOINT_URL = "http://localhost:8080/api/character/post";
+    static final String GET_ENDPOINT_URL = "https://rickandmortyapi.com/api/character/?page=1";
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     @Autowired
     private CharRepository charRepository;
+
+    @Autowired
+    private LocRepository locRepository;
+
+    @Autowired
+    private OrigRepository origRepository;
 
     //    @Scheduled(cron = "0 * * * * ?")
     @Scheduled(fixedRate = 10000)
@@ -44,20 +55,28 @@ public class ScheduledTasks {
         ResponseEntity<MainEntity> result = restTemplate.exchange(GET_ENDPOINT_URL, HttpMethod.GET, null,
                 MainEntity.class);
 
+        MainEntity body = result.getBody();
+        Info info = body.getInfo();
+        long pages = info.getPages();
 
-        List<Result> resultList = result.getBody().getResults();
+        for (int i = 1; i <= pages; i++) {
+                result = restTemplate.exchange("https://rickandmortyapi.com/api/character/?page=" + i,
+                        HttpMethod.GET, null, MainEntity.class);
 
-        if (resultList != null) {
-            for (Result res : resultList) {
-                addNewCharacter(res);
-//                System.out.println(res.toString());
-            }
-            logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+                List<Result> resultList = result.getBody().getResults();
+
+                if (resultList != null) {
+                    for (Result res : resultList) {
+                        addNewCharacter(res);
+                System.out.println(res.toString());
+                    }
+                    logger.info("Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+                }
+
         }
     }
 
     public void addNewCharacter(Result result){
-        System.out.println("ControllerREST IN result: " + result.toString());
 
         Character character = new Character();
 
@@ -67,19 +86,22 @@ public class ScheduledTasks {
         character.setSpecies(result.getSpecies());
         character.setType(result.getType());
         character.setGender(result.getGender());
-        character.setOrigin(result.getOrigin());
-        character.setLocation(result.getLocation());
+        if (origRepository.isExistOrigin(result.getOriginIn().getName()) == null){
+            character.setOrigin(result.getOriginIn());
+        }
+        if (locRepository.isExistLocation(result.getLocationIn().getName()) == null) {
+            character.setLocation(result.getLocationIn());
+        }
         character.setImage(result.getImage());
 
-        Set<String> s =result.getEpisode();
+        List<String> s =result.getEpisode();
         for (String str : s) {
             Object obj = str;
             character.setEpisode(null); // TODO!!!
         }
-
         character.setUrl(result.getUrl());
         character.setCreated(result.getCreated());
-
+        System.out.println("Character for save: " + character);
         if (charRepository != null){
         charRepository.save(character);
             System.out.println("Character " + character.getId() + " is saved!" +

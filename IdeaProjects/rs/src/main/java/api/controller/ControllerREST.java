@@ -1,6 +1,7 @@
 package api.controller;
 
 import api.model.forDB.Character;
+import api.model.forDB.Origin;
 import api.repository.CharRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,9 @@ public class ControllerREST {
         return charRepository.getRandomChar();
     }
 
-
+   /* Origin isExist (String name){
+        return charRepository.isExist(name);
+  }*/
 
 
 
