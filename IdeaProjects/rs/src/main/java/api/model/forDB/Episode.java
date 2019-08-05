@@ -1,5 +1,7 @@
 package api.model.forDB;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 

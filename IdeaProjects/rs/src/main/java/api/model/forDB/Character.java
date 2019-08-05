@@ -1,6 +1,11 @@
 package api.model.forDB;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "character")
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Character implements Serializable{
 
     @Id
@@ -32,6 +37,7 @@ public class Character implements Serializable{
     private String image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "character")
+    @JsonIgnore
     Set<Episode> episode;
 
     private String url;

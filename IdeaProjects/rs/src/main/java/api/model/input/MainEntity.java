@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainEntity implements Serializable{
+public class MainEntity implements Serializable {
 
     private Info info;
     private List<Result> results = new ArrayList();

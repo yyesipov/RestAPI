@@ -1,5 +1,8 @@
 package api.model.forDB;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -20,6 +23,7 @@ public class Location implements Serializable{
     private String url;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @JsonIgnore
     Set<Character> characters;
 
     public Location() {
